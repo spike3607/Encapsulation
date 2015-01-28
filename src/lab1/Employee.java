@@ -1,5 +1,6 @@
 package lab1;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -20,19 +21,26 @@ public class Employee {
     boolean reviewedDeptPolicies;
     boolean movedIn;
     String cubeId;
+    Date currentDate;
 
     public Employee() {
-
+        currentDate = new Date();
     }
 
     // Assume this must be performed first
     public void meetWithHrForBenefitAndSalryInfo() {
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        String fmtDate = sdf.format(currentDate);
+        System.out.println("Met with Hr on " + fmtDate);
         metWithHr = true;
     }
 
     // Assume this is must be performed second
     public void meetDepartmentStaff() {
         if(metWithHr) {
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+            String fmtDate = sdf.format(currentDate);
+            System.out.println("Met with Dept. Staff on " + fmtDate);
             metDeptStaff = true;
         } else {
             System.out.println("Sorry, you cannot meet with "
@@ -43,6 +51,9 @@ public class Employee {
     // Assume this must be performed third
     public void reviewDeptPolicies() {
         if(metWithHr && metDeptStaff) {
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+            String fmtDate = sdf.format(currentDate);
+            System.out.println("Reviewed Dept. Policies on " + fmtDate);
             reviewedDeptPolicies = true;
         } else {
             System.out.println("Sorry, you cannot review "
@@ -54,6 +65,9 @@ public class Employee {
     // Assume this must be performed 4th
     public void moveIntoCubicle(String cubeId) {
         if(metWithHr && metDeptStaff && reviewedDeptPolicies) {
+            SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+            String fmtDate = sdf.format(currentDate);
+            System.out.println("Moved into cube on " + fmtDate);
             this.cubeId = cubeId;
             this.movedIn = true;
         } else {
@@ -66,11 +80,14 @@ public class Employee {
     }
 
     public String getStatus() {
+        SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+        String fmtDate = sdf.format(currentDate);
+
         if(metWithHr && metDeptStaff
            && reviewedDeptPolicies && movedIn) {
-            return "Orientation is complete";
+            return "Orientation is completed on: " + fmtDate;
         } else {
-            return "Orientation in progress...";
+            return fmtDate + ": Orientation in progress...";
         }
     }
 }
